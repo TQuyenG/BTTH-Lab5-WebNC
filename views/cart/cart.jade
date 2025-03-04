@@ -1,0 +1,56 @@
+extends ../layouts/main 
+ 
+block content 
+    h1 Giỏ hàng của bạn 
+ 
+    if cartItems.length === 0 
+        .empty-cart-container
+            .empty-cart-image
+                img(src="/images/pngwing.com.png", alt="Giỏ hàng trống")
+            .empty-cart-message
+                p Giỏ hàng của bạn đang trống. Tiếp tục mua sắm.
+            .empty-cart-action
+                a.back-to-shop(href="/products")
+                    i.fa.fa-arrow-left
+                    span Quay lại mua sắm
+    else 
+        table#cart-table 
+            thead 
+                tr 
+                    th Sản phẩm 
+                    th Giá 
+                    th Số lượng 
+                    th Tổng tiền 
+                    th Thao tác 
+            tbody 
+                - let totalAmount = 0 
+                each item in cartItems 
+                    - const itemTotal = item.product.price * item.quantity 
+                    - totalAmount += itemTotal 
+                    tr(data-product-id=item.product._id.toString(), data-price=item.product.price)
+                        td= item.product.name 
+                        td.product-price= item.product.price.toLocaleString('vi-VN') + ' đ' 
+                        td.quantity-cell
+                            .quantity-control
+                                button.quantity-btn.decrease(type="button") -
+                                input.quantity-input(type="number", name="quantity", value=item.quantity, min="1", data-product-id=item.product._id.toString())
+                                button.quantity-btn.increase(type="button") +
+                        td.item-total= itemTotal.toLocaleString('vi-VN') + ' đ' 
+                        td 
+                            form(action="/cart/remove/" + item.product._id.toString(), method="POST") 
+                                button(type="submit", class="remove-button") Xóa 
+                tr.total-row
+                    td(colspan="3")  
+                        strong Tổng cộng: 
+                    td#cart-total= totalAmount.toLocaleString('vi-VN') + ' đ' 
+                    td 
+                        form(action="/cart/clear", method="POST", style="display: inline;") 
+                            button(type="submit", class="clear-button") Xóa giỏ hàng 
+ 
+        div.cart-actions 
+            a.back-to-shop(href="/products")
+                i.fa.fa-arrow-left
+                span Tiếp tục mua sắm
+            a(href="/checkout") Thanh toán
+
+    script(src="/javascripts/main.js")

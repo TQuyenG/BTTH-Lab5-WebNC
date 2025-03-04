@@ -1,0 +1,62 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title ? title + ' - Shop Online' : 'Shop Online'
+    link(rel="stylesheet", href="/stylesheets/style.css")
+  body
+    header
+      div.container
+        div.header-content
+          a.logo(href="/") Shop Online
+          ul.nav-menu
+            li
+              a(href="/") Trang chủ
+            li
+              a(href="/products") Sản phẩm
+            li
+              a.cart-icon(href="/cart") 
+                | Giỏ hàng
+                if session && session.cart && session.cart.length
+                  span.cart-count= session.cart.length
+    
+    main
+      div.container
+        block content
+    
+    footer
+      div.container
+        div.footer-content
+          div.footer-section
+            h3 Về chúng tôi
+            p Shop Online cung cấp các sản phẩm chất lượng cao với giá cả hợp lý.
+          div.footer-section
+            h3 Liên hệ
+            p Email: info@shoponline.com
+            p Điện thoại: 0123 456 789
+          div.footer-section
+            h3 Chính sách
+            p Chính sách giao hàng
+            p Đổi trả hàng
+            p Điều khoản
+          div.footer-section
+            h3 Liên kết
+            a(href="/") Trang chủ
+            a(href="/products") Sản phẩm
+            a(href="/cart") Giỏ hàng
+          div.footer-section
+            h3 Theo dõi chúng tôi
+            a(href="https://www.facebook.com" target="_blank") 
+              i.fab.fa-facebook Facebook 
+            a(href="https://www.instagram.com" target="_blank") 
+              i.fab.fa-instagram Instagram
+            a(href="https://www.twitter.com" target="_blank") 
+              i.fab.fa-twitter Twitter
+            a(href="https://www.linkedin.com" target="_blank") 
+              i.fab.fa-linkedin Linkedin
+        
+        div.footer-bottom
+          p &copy; 2025 Shop Online. All rights reserved.
+    
+    script(src="/javascripts/main.js")

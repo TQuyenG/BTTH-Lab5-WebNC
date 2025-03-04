@@ -1,0 +1,32 @@
+extends ../layouts/main
+
+block content
+    h1 ~ Danh sách sản phẩm ~
+
+    .products-container
+        if products.length === 0
+            .no-products-container
+                img.no-products-image(src="/images/img-error.jpg", alt="Không có sản phẩm")
+                p.no-products Không có sản phẩm nào.
+                a.back-to-home(href="/") 
+                    i.fa.fa-arrow-left
+                    span Quay lại trang chủ
+        else
+            .products-grid
+                each product in products
+                    .product-card
+                        .product-image-container
+                            img.product-image(
+                                src=product.image || '/images/img-error.jpg', 
+                                alt=product.name,
+                                onerror="this.onerror=null; this.src='/images/img-error.jpg';"
+                            )
+                        .product-details-container
+                            .product-info
+                                h2.product-name= product.name
+                                p.product-price= product.price.toLocaleString('vi-VN') + ' đ'
+                            .product-actions
+                                a.detail-button(href=`/products/${product._id}`) Chi tiết
+                                form.add-cart-form(action=`/cart/add/${product._id}`, method="POST")
+                                    input(type="hidden", name="quantity", value="1")
+                                    button.add-to-cart-button(type="submit") Thêm vào giỏ hàng

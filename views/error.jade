@@ -1,0 +1,15 @@
+doctype html
+html(lang="vi")
+    head
+        meta(charset="UTF-8")
+        title Lỗi
+    body
+        h1 Đã xảy ra lỗi!
+        if error
+            h2 Lỗi: #{error.message}
+            if error.status
+                p Mã trạng thái: #{error.status}
+            pre #{error.stack}
+        else
+            p Không có thông tin lỗi.
+        a(href="/") Trở về trang chủ

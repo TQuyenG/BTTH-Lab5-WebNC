@@ -1,0 +1,28 @@
+extends ../layouts/main
+
+block content
+    h1= product.name
+
+    stylus
+
+    div.product-detail-container
+        img.product-image(
+            src=product.image || '/images/img-error.jpg', 
+            alt=product.name,
+            onerror="this.onerror=null; this.src='/images/img-error.jpg';"
+        )
+        
+        div.product-info
+            p.price= product.price.toLocaleString('vi-VN') + ' đ'
+            p.description= product.description
+            p.category Danh mục: #{product.category}
+            p.stock Còn lại: #{product.stock} sản phẩm
+            
+            form(action="/cart/add/" + product._id.toString(), method="POST")
+                div.quantity
+                    label(for="quantity") Số lượng:
+                    input#quantity(type="number", name="quantity", value="1", min="1", max=product.stock)
+                
+                button.add-to-cart Thêm vào giỏ hàng
+                
+            a.back-to-list(href="/products") Quay lại danh sách sản phẩm
