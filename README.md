@@ -5,9 +5,11 @@ những yêu cầu như sau:
 - Phần front-end: Sử dụng view engine (chẳng hạn ejs)
 • Tạo 3 trang là trang danh sách sản phẩm, trang thông tin chi tiết của một sản phẩm và trang
 giỏ hàng.
+
 • Ở trang hiển thị danh sách sản phẩm, người dùng có thể bấm vào nút xem thông tin chi tiết
 (liên kết với trang thông tin chi tiết sản phẩm) hoặc thêm vào giỏ hàng từ 1 sản phẩm. Trên
 góc phải phía trên có phần giỏ hàng để liên kết với trang giỏ hàng.
+
 • Các trang phải có nút bấm liên kết để di chuyển qua lại với nhau.
 
 
